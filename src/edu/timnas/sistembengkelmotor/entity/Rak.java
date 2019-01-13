@@ -6,7 +6,16 @@ public class Rak {
     
     private int idRak;
     private String lokasi;
-
+    
+//  2 Constructors
+    public Rak(){
+        
+    }
+    public Rak(String lokasi) {
+        this.lokasi = lokasi;
+    }
+    
+    
     public int getIdRak() {
         return idRak;
     }

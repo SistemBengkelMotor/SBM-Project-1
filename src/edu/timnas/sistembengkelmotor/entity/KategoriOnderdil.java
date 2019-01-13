@@ -7,7 +7,17 @@ public class KategoriOnderdil {
     
     private int idKaton;
     private String namaKaton;
-
+    
+//  2 Constructors
+    public KategoriOnderdil(){
+        
+    }
+    public KategoriOnderdil(String namaKaton) {
+        this.namaKaton = namaKaton;
+    }
+    
+    
+    
     public int getIdKaton() {
         return idKaton;
     }
