@@ -28,25 +28,40 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
         this.connection = connection;
     }
     
-    private final String insertKategoriOnderdil = "INSERT INTO KateoriOnderdil (namaKaton) "
+    private final String insertKategoriOnderdil = "INSERT INTO kategoriOnderdil (namaKaton) "
             + "VALUES (?)";
-    private final String updateKategoriOnderdil = "UPDATE KategoriOnderdil SET namaKaton=? "
+    private final String updateKategoriOnderdil = "UPDATE kategoriOnderdil SET namaKaton=? "
             + "WHERE idKaton=?";
-    private final String deleteKategoriOnderdil = "DELETE FROM KategoriOnderdil WHERE idKaton=?";
-    private final String getById = "SELECT * FROM KategoriOnderdil WHERE idKaton=?";
-    private final String getByNama = "SELECT * FROM KategoriOnderdil WHERE namaKaton=?";
-    private final String selectAll = "SELECT * FROM KategoriOnderdil";
+    private final String deleteKategoriOnderdil = "DELETE FROM kategoriOnderdil WHERE idKaton=?";
+    private final String getById = "SELECT * FROM kategoriOnderdil WHERE idKaton=?";
+    private final String getByNama = "SELECT * FROM kategoriOnderdil WHERE namaKaton=?";
+    private final String selectAll = "SELECT * FROM kategoriOnderdil";
     
     @Override
     public void insertKategoriOnderdil(KategoriOnderdil kategoriOnderdil) throws KategoriOnderdilException {
         PreparedStatement statement = null;
         try {
+            connection.setAutoCommit(false);
+            
             statement = connection.prepareStatement(insertKategoriOnderdil);
             statement.setString(1, kategoriOnderdil.getNamaKaton());
             statement.executeUpdate();
+            
+            connection.commit();
+            
         } catch (SQLException e) {
+            
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+            }
+            
             throw new KategoriOnderdilException(e.getMessage());
         }finally{
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+            }
             // cek statement kosong atau tidak
             if (statement != null) {
                try {
@@ -62,13 +77,28 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
     public void updateKategoriOnderdil(KategoriOnderdil kategoriOnderdil) throws KategoriOnderdilException {
         PreparedStatement statement = null;
         try {
+            connection.setAutoCommit(false);
+            
             statement = connection.prepareStatement(updateKategoriOnderdil);
             statement.setString(1, kategoriOnderdil.getNamaKaton());
             statement.setInt(2, kategoriOnderdil.getIdKaton());
             statement.executeUpdate();
+            
+            connection.commit();
+            
         } catch (SQLException e) {
+            
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+            }
+            
             throw new KategoriOnderdilException(e.getMessage());
         }finally{
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+            }
             // cek statement kosong atau tidak
             if (statement != null) {
                try {
@@ -84,12 +114,27 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
     public void deleteKategoriOnderdil(Integer idKaton) throws KategoriOnderdilException {
         PreparedStatement statement = null;
         try {
+            connection.setAutoCommit(false);
+            
             statement = connection.prepareStatement(deleteKategoriOnderdil);
             statement.setInt(1, idKaton);
             statement.executeUpdate();
+            
+            connection.commit();
+            
         } catch (SQLException e) {
+            
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+            }
+            
             throw new KategoriOnderdilException(e.getMessage());
         }finally{
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+            }
             // cek statement kosong atau tidak
             if (statement != null) {
                try {
@@ -97,7 +142,7 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
                 } catch (SQLException e) {
                 
                 } 
-            }   
+            }
         }
     }
 
@@ -105,6 +150,8 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
     public KategoriOnderdil getKategoriOnderdil(Integer idKaton) throws KategoriOnderdilException {
         PreparedStatement statement = null;
         try {
+            connection.setAutoCommit(false);
+            
             statement = connection.prepareStatement(getById);
             statement.setInt(1, idKaton);
             
@@ -118,10 +165,23 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
             }else{
                 throw new KategoriOnderdilException("Kategori Onderdil dengan id "+idKaton+" tidak ditemukan");
             }
+            
+            connection.commit();
+            
             return kategoriOnderdil;
         } catch (SQLException e) {
+            
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+            }
+            
             throw new KategoriOnderdilException(e.getMessage());
         }finally{
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+            }
             // cek statement kosong atau tidak
             if (statement != null) {
                try {
@@ -129,7 +189,7 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
                 } catch (SQLException e) {
                 
                 } 
-            }   
+            }
         }
     }
 
@@ -137,6 +197,8 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
     public KategoriOnderdil getKategoriOnderdil(String namaKaton) throws KategoriOnderdilException {
         PreparedStatement statement = null;
         try {
+            connection.setAutoCommit(false);
+            
             statement = connection.prepareStatement(getByNama);
             statement.setString(1, namaKaton);
             
@@ -150,10 +212,23 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
             }else{
                 throw new KategoriOnderdilException("Kategori Onderdil dengan nama "+namaKaton+" tidak ditemukan");
             }
+            
+            connection.commit();
+            
             return kategoriOnderdil;
         } catch (SQLException e) {
+            
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+            }
+            
             throw new KategoriOnderdilException(e.getMessage());
         }finally{
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+            }
             // cek statement kosong atau tidak
             if (statement != null) {
                try {
@@ -161,7 +236,7 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
                 } catch (SQLException e) {
                 
                 } 
-            }   
+            }
         }
     }
 
@@ -171,6 +246,8 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
         List<KategoriOnderdil> list = new ArrayList<KategoriOnderdil>();
         
         try {
+            connection.setAutoCommit(false);
+            
             statement = connection.createStatement();
             
             ResultSet result = statement.executeQuery(selectAll);
@@ -182,10 +259,23 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
                 kategoriOnderdil.setNamaKaton(result.getString("namaKaton"));
                 list.add(kategoriOnderdil);
             }
+            
+            connection.commit();
+            
             return list;
         } catch (SQLException e) {
+            
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+            }
+            
             throw new KategoriOnderdilException(e.getMessage());
         }finally{
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+            }
             // cek statement kosong atau tidak
             if (statement != null) {
                try {
@@ -193,7 +283,7 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
                 } catch (SQLException e) {
                 
                 } 
-            }   
+            }
         }
     }
     
