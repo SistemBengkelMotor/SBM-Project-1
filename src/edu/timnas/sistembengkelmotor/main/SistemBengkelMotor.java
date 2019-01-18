@@ -13,7 +13,7 @@ public class SistemBengkelMotor {
 //        SistemBengkelMotorDatabase.getConnection();
     /* 
 //   Insert data
-        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.kategoriOnderdilDao();
+        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.getKategoriOnderdilDao();
         KategoriOnderdil katon =  new KategoriOnderdil();
         
         katon.setNamaKaton("Busi Motor");
@@ -21,7 +21,7 @@ public class SistemBengkelMotor {
         dao.insertKategoriOnderdil(katon);
 
 //    Update data
-        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.kategoriOnderdilDao();
+        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.getKategoriOnderdilDao();
         KategoriOnderdil katon =  dao.getKategoriOnderdil(1);
         
         katon.setNamaKaton("Rem Motor Ninja R");
@@ -29,7 +29,7 @@ public class SistemBengkelMotor {
         dao.updateKategoriOnderdil(katon);
     
 //  Tampil data
-        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.kategoriOnderdilDao();
+        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.getKategoriOnderdilDao();
         KategoriOnderdil katon =  dao.getKategoriOnderdil("Rem Motor Ninja R");
                 
         List<KategoriOnderdil> list = dao.selectAllKategoriOnderdil();
@@ -40,10 +40,10 @@ public class SistemBengkelMotor {
         }
 
 //  Delete Data
-    */
-        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.kategoriOnderdilDao();
+        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.getKategoriOnderdilDao();
         
         dao.deleteKategoriOnderdil(1);
+    */
         
     
     }

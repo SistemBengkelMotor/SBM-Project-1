@@ -15,7 +15,7 @@ public class Rak {
         this.lokasi = lokasi;
     }
     
-    
+// getter & setter    
     public int getIdRak() {
         return idRak;
     }
@@ -31,7 +31,9 @@ public class Rak {
     public void setLokasi(String lokasi) {
         this.lokasi = lokasi;
     }
-
+    
+//  equal & hashCode
+    
     @Override
     public int hashCode() {
         int hash = 5;
