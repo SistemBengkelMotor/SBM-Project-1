@@ -2,8 +2,10 @@ package edu.timnas.sistembengkelmotor.database;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import edu.timnas.sistembengkelmotor.impl.KategoriOnderdilDaoImpl;
+import edu.timnas.sistembengkelmotor.impl.MekanikDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.RakDaoImpl;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
+import edu.timnas.sistembengkelmotor.service.MekanikDao;
 import edu.timnas.sistembengkelmotor.service.RakDao;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,6 +16,7 @@ public class SistemBengkelMotorDatabase {
 //  objek yang sudah dideklarasikan itu satu tapi dapat diakses oleh semua class
     private static KategoriOnderdilDao kategoriOnderdilDao;
     private static RakDao rakDao;
+    private static MekanikDao mekanikDao;
     
     public static Connection getConnection() throws SQLException{
         if (connection == null) {
@@ -44,5 +47,12 @@ public class SistemBengkelMotorDatabase {
         return rakDao;
     }
     
+//Mekanik
+    public static MekanikDao getMekanikDao() throws SQLException{
+        if (mekanikDao == null) {
+            mekanikDao = new MekanikDaoImpl(getConnection());   
+        }
+        return mekanikDao;
+    }
     
 }
