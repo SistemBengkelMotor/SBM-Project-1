@@ -5,6 +5,8 @@
  */
 package edu.timnas.sistembengkelmotor.entity;
 
+import java.util.Objects;
+
 /**
  *
  * @author teguhsis
@@ -13,14 +15,17 @@ public class Type {
     
     private int idType;
     private int idMerk;
+    private String jenisType;
     
 //   2 constructors
     public Type(){
         
     }
-    public Type(int idMerk) {
+    public Type(int idMerk, String jenisType) {
         this.idMerk = idMerk;
+        this.jenisType = jenisType;
     }
+    
     
 //  getter & setter (semua variabel)
 
@@ -39,14 +44,23 @@ public class Type {
     public void setIdMerk(int idMerk) {
         this.idMerk = idMerk;
     }
+
+    public String getJenisType() {
+        return jenisType;
+    }
+
+    public void setJenisType(String jenisType) {
+        this.jenisType = jenisType;
+    }
     
 //  equals & hashCode
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 61 * hash + this.idType;
-        hash = 61 * hash + this.idMerk;
+        int hash = 7;
+        hash = 97 * hash + this.idType;
+        hash = 97 * hash + this.idMerk;
+        hash = 97 * hash + Objects.hashCode(this.jenisType);
         return hash;
     }
 
@@ -68,6 +82,11 @@ public class Type {
         if (this.idMerk != other.idMerk) {
             return false;
         }
+        if (!Objects.equals(this.jenisType, other.jenisType)) {
+            return false;
+        }
         return true;
     }
+
+    
 }

@@ -18,6 +18,7 @@ public interface TypeDao {
     public void updateType(Type type) throws TypeException;
     public void deleteType(Integer idType) throws TypeException;
     public Type getType(Integer idType) throws TypeException;
-    public Type getType(int idMerk) throws TypeException;
+    public Type getMerk(int idMerk) throws TypeException;
     public List<Type> selectAllType() throws TypeException;
+    public List<Type> selectAllCombType() throws TypeException;
 }

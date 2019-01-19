@@ -5,10 +5,12 @@ import edu.timnas.sistembengkelmotor.impl.KategoriOnderdilDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.MekanikDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.MerkDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.RakDaoImpl;
+import edu.timnas.sistembengkelmotor.impl.TypeDaoImpl;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
 import edu.timnas.sistembengkelmotor.service.MekanikDao;
 import edu.timnas.sistembengkelmotor.service.MerkDao;
 import edu.timnas.sistembengkelmotor.service.RakDao;
+import edu.timnas.sistembengkelmotor.service.TypeDao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -20,6 +22,7 @@ public class SistemBengkelMotorDatabase {
     private static RakDao rakDao;
     private static MekanikDao mekanikDao;
     private static MerkDao merkDao;
+    private static TypeDao typeDao;
     
     public static Connection getConnection() throws SQLException{
         if (connection == null) {
@@ -64,6 +67,14 @@ public class SistemBengkelMotorDatabase {
             merkDao = new MerkDaoImpl(getConnection());   
         }
         return merkDao;
+    }
+    
+//Type
+    public static TypeDao getTypeDao() throws SQLException{
+        if (typeDao == null) {
+            typeDao = new TypeDaoImpl(getConnection());   
+        }
+        return typeDao;
     }
     
 }
