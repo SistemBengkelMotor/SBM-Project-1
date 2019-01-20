@@ -5,9 +5,9 @@
  */
 package edu.timnas.sistembengkelmotor.impl;
 
-import edu.timnas.sistembengkelmotor.entity.Type;
-import edu.timnas.sistembengkelmotor.error.TypeException;
-import edu.timnas.sistembengkelmotor.service.TypeDao;
+import edu.timnas.sistembengkelmotor.entity.Motor;
+import edu.timnas.sistembengkelmotor.error.MotorException;
+import edu.timnas.sistembengkelmotor.service.MotorDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,36 +20,36 @@ import java.util.List;
  *
  * @author teguhsis
  */
-public class TypeDaoImpl implements TypeDao{
+public class MotorDaoImpl implements MotorDao{
     
     private Connection connection;
     
-    public TypeDaoImpl(Connection connection) {
+    public MotorDaoImpl(Connection connection) {
         this.connection = connection;
     }
     
-    private final String insertType = "INSERT INTO type (idMerk,jenisType) "
+    private final String insertMotor = "INSERT INTO motor (nopol,idType) "
             + "VALUES (?,?)";
-    private final String updateType = "UPDATE type SET idMerk=?, jenisType=? "
-            + "WHERE idType=?";
-    private final String deleteType = "DELETE FROM type WHERE idType=?";
-    private final String getById = "SELECT * FROM type WHERE idType=?";
-    private final String getByNama = "SELECT * FROM type WHERE idMerk=?";
-    private final String selectAll = "SELECT * FROM type";
-    private final String selectAllComb = "SELECT t.idType, m.namaMerk, t.jenisType "
-            + "FROM merk as m,type as t "
-            + "WHERE t.idMerk=m.idMerk;";
+    private final String updateMotor = "UPDATE motor SET idType=? "
+            + "WHERE nopol=?";
+    private final String deleteMotor = "DELETE FROM motor WHERE nopol=?";
+    private final String getById = "SELECT * FROM motor WHERE nopol=?";
+    private final String getByNama = "SELECT * FROM motor WHERE idType=?";
+    private final String selectAll = "SELECT * FROM motor";
+    private final String selectAllComb = "SELECT mot.nopol, mrk.namaMerk, ty.jenisType "
+            + "FROM merk as mrk, type as ty, motor as mot "
+            + "WHERE mot.idType=ty.idType AND ty.idMerk=mrk.idMerk;"; //3atribut: nopol,namaMerk,JenisType
     
-    
+
     @Override
-    public void insertType(Type type) throws TypeException {
+    public void insertMotor(Motor motor) throws MotorException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
-            statement = connection.prepareStatement(insertType);
-            statement.setInt(1, type.getIdMerk());
-            statement.setString(2, type.getJenisType());
+            statement = connection.prepareStatement(insertMotor);
+            statement.setString(1, motor.getNopol());
+            statement.setInt(2, motor.getIdType());
             statement.executeUpdate();
             
             connection.commit();
@@ -61,7 +61,7 @@ public class TypeDaoImpl implements TypeDao{
             } catch (SQLException ex) {
             }
             
-            throw new TypeException(e.getMessage());
+            throw new MotorException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -79,15 +79,14 @@ public class TypeDaoImpl implements TypeDao{
     }
 
     @Override
-    public void updateType(Type type) throws TypeException {
+    public void updateMotor(Motor motor) throws MotorException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
-            statement = connection.prepareStatement(updateType);
-            statement.setInt(1, type.getIdMerk());
-            statement.setString(2, type.getJenisType());
-            statement.setInt(3, type.getIdType());
+            statement = connection.prepareStatement(updateMotor);
+            statement.setInt(1, motor.getIdType());
+            statement.setString(2, motor.getNopol());
             statement.executeUpdate();
             
             connection.commit();
@@ -99,7 +98,7 @@ public class TypeDaoImpl implements TypeDao{
             } catch (SQLException ex) {
             }
             
-            throw new TypeException(e.getMessage());
+            throw new MotorException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -117,13 +116,13 @@ public class TypeDaoImpl implements TypeDao{
     }
 
     @Override
-    public void deleteType(Integer idType) throws TypeException {
+    public void deleteMotor(String nopol) throws MotorException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
-            statement = connection.prepareStatement(deleteType);
-            statement.setInt(1, idType);
+            statement = connection.prepareStatement(deleteMotor);
+            statement.setString(1, nopol);
             statement.executeUpdate();
             
             connection.commit();
@@ -135,7 +134,7 @@ public class TypeDaoImpl implements TypeDao{
             } catch (SQLException ex) {
             }
             
-            throw new TypeException(e.getMessage());
+            throw new MotorException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -153,29 +152,28 @@ public class TypeDaoImpl implements TypeDao{
     }
 
     @Override
-    public Type getType(Integer idType) throws TypeException {
+    public Motor getMotor(String nopol) throws MotorException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
             statement = connection.prepareStatement(getById);
-            statement.setInt(1, idType);
+            statement.setString(1, nopol);
             
             ResultSet result = statement.executeQuery();
-            Type type = null;
+            Motor motor = null;
             
             if (result.next()) {
-                type = new Type();
-                type.setIdType(result.getInt("idType"));
-                type.setIdMerk(result.getInt("idMerk"));
-                type.setJenisType(result.getString("jenisType"));
+                motor = new Motor();
+                motor.setNopol(result.getString("nopol"));
+                motor.setIdType(result.getInt("idType"));
             }else{
-                throw new TypeException("Type dengan id "+idType+" tidak ditemukan");
+                throw new MotorException("Motor dengan id "+nopol+" tidak ditemukan");
             }
             
             connection.commit();
             
-            return type;
+            return motor;
         } catch (SQLException e) {
             
             try {
@@ -183,7 +181,7 @@ public class TypeDaoImpl implements TypeDao{
             } catch (SQLException ex) {
             }
             
-            throw new TypeException(e.getMessage());
+            throw new MotorException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -201,57 +199,14 @@ public class TypeDaoImpl implements TypeDao{
     }
 
     @Override
-    public Type getMerk(int idMerk) throws TypeException {
-        PreparedStatement statement = null;
-        try {
-            connection.setAutoCommit(false);
-            
-            statement = connection.prepareStatement(getByNama);
-            statement.setInt(1, idMerk);
-            
-            ResultSet result = statement.executeQuery();
-            Type type = null;
-            
-            if (result.next()) {
-                type = new Type();
-                type.setIdType(result.getInt("idType"));
-                type.setIdMerk(result.getInt("idMerk"));
-                type.setJenisType(result.getString("jenisType"));
-            }else{
-                throw new TypeException("Type dengan idMerk "+idMerk+" tidak ditemukan");
-            }
-            
-            connection.commit();
-            
-            return type;
-        } catch (SQLException e) {
-            
-            try {
-                connection.rollback();
-            } catch (SQLException ex) {
-            }
-            
-            throw new TypeException(e.getMessage());
-        }finally{
-            try {
-                connection.setAutoCommit(true);
-            } catch (SQLException ex) {
-            }
-            // cek statement kosong atau tidak
-            if (statement != null) {
-               try {
-                    statement.close();
-                } catch (SQLException e) {
-                
-                } 
-            }
-        }
+    public Motor getType(int idType) throws MotorException {
+        return null; // fitur ini ditiadakan dulu
     }
 
     @Override
-    public List<Type> selectAllType() throws TypeException {
+    public List<Motor> selectAllMotor() throws MotorException {
         Statement statement = null;
-        List<Type> list = new ArrayList<Type>();
+        List<Motor> list = new ArrayList<Motor>();
         
         try {
             connection.setAutoCommit(false);
@@ -259,14 +214,13 @@ public class TypeDaoImpl implements TypeDao{
             statement = connection.createStatement();
             
             ResultSet result = statement.executeQuery(selectAll);
-            Type type = null;
+            Motor motor = null;
             
             while (result.next()) {
-                type = new Type();
-                type.setIdType(result.getInt("idType"));
-                type.setIdMerk(result.getInt("idMerk"));
-                type.setJenisType(result.getString("jenisType"));
-                list.add(type);
+                motor = new Motor();
+                motor.setNopol(result.getString("nopol"));
+                motor.setIdType(result.getInt("idType"));
+                list.add(motor);
             }
             
             connection.commit();
@@ -279,7 +233,7 @@ public class TypeDaoImpl implements TypeDao{
             } catch (SQLException ex) {
             }
             
-            throw new TypeException(e.getMessage());
+            throw new MotorException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -297,9 +251,9 @@ public class TypeDaoImpl implements TypeDao{
     }
 
     @Override
-    public List<Type> selectAllCombType() throws TypeException {
+    public List<Motor> selectAllCombMotor() throws MotorException {
         Statement statement = null;
-        List<Type> list = new ArrayList<Type>();
+        List<Motor> list = new ArrayList<Motor>();
         
         try {
             connection.setAutoCommit(false);
@@ -307,15 +261,14 @@ public class TypeDaoImpl implements TypeDao{
             statement = connection.createStatement();
             
             ResultSet result = statement.executeQuery(selectAllComb);
-            Type type = null;
+            Motor motor = null;
             
             while (result.next()) {
-                type = new Type();
-                type.setIdType(result.getInt("idType"));
-//                type.setIdMerk(result.getInt("idMerk"));
-                type.setNamaMerk(result.getString("namaMerk"));
-                type.setJenisType(result.getString("jenisType"));
-                list.add(type);
+                motor = new Motor();
+                motor.setNopol(result.getString("nopol"));
+                motor.setNamaMerk(result.getString("namaMerk"));
+                motor.setJenisType(result.getString("jenisType"));
+                list.add(motor);
             }
             
             connection.commit();
@@ -328,7 +281,7 @@ public class TypeDaoImpl implements TypeDao{
             } catch (SQLException ex) {
             }
             
-            throw new TypeException(e.getMessage());
+            throw new MotorException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);

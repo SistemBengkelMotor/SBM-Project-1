@@ -11,24 +11,31 @@ import java.util.Objects;
  *
  * @author teguhsis
  */
-public class Type {
+public class Motor {
     
+    private String nopol;
     private int idType;
-    private int idMerk;
-    private String jenisType;
-    private String namaMerk; // untuk tabel kombinasi
+// untuk tabel kombinasi
+    private String jenisType; 
+    private String namaMerk;
     
-//   2 constructors
-    public Type(){
+//    2 costructors
+    public Motor(){
         
     }
-    public Type(int idMerk, String jenisType) {
-        this.idMerk = idMerk;
-        this.jenisType = jenisType;
+    public Motor(int idType) {
+        this.idType = idType;
     }
     
-    
-//  getter & setter (semua variabel)
+//    getter & setter
+
+    public String getNopol() {
+        return nopol;
+    }
+
+    public void setNopol(String nopol) {
+        this.nopol = nopol;
+    }
 
     public int getIdType() {
         return idType;
@@ -36,14 +43,6 @@ public class Type {
 
     public void setIdType(int idType) {
         this.idType = idType;
-    }
-
-    public int getIdMerk() {
-        return idMerk;
-    }
-
-    public void setIdMerk(int idMerk) {
-        this.idMerk = idMerk;
     }
 
     public String getJenisType() {
@@ -62,15 +61,14 @@ public class Type {
         this.namaMerk = namaMerk;
     }
     
-//  equals & hashCode
-
+//    equals & hashCode
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + this.idType;
-        hash = 37 * hash + this.idMerk;
-        hash = 37 * hash + Objects.hashCode(this.jenisType);
-        hash = 37 * hash + Objects.hashCode(this.namaMerk);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.nopol);
+        hash = 23 * hash + this.idType;
+        hash = 23 * hash + Objects.hashCode(this.jenisType);
+        hash = 23 * hash + Objects.hashCode(this.namaMerk);
         return hash;
     }
 
@@ -85,11 +83,11 @@ public class Type {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Type other = (Type) obj;
+        final Motor other = (Motor) obj;
         if (this.idType != other.idType) {
             return false;
         }
-        if (this.idMerk != other.idMerk) {
+        if (!Objects.equals(this.nopol, other.nopol)) {
             return false;
         }
         if (!Objects.equals(this.jenisType, other.jenisType)) {
@@ -100,8 +98,5 @@ public class Type {
         }
         return true;
     }
-
-    
-
     
 }
