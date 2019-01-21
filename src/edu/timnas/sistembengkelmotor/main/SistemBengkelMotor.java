@@ -8,6 +8,7 @@ import edu.timnas.sistembengkelmotor.entity.Merk;
 import edu.timnas.sistembengkelmotor.entity.Motor;
 import edu.timnas.sistembengkelmotor.entity.Onderdil;
 import edu.timnas.sistembengkelmotor.entity.Rak;
+import edu.timnas.sistembengkelmotor.entity.Supplier;
 import edu.timnas.sistembengkelmotor.entity.Type;
 import edu.timnas.sistembengkelmotor.error.JasaException;
 import edu.timnas.sistembengkelmotor.error.KategoriOnderdilException;
@@ -16,6 +17,7 @@ import edu.timnas.sistembengkelmotor.error.MerkException;
 import edu.timnas.sistembengkelmotor.error.MotorException;
 import edu.timnas.sistembengkelmotor.error.OnderdilException;
 import edu.timnas.sistembengkelmotor.error.RakException;
+import edu.timnas.sistembengkelmotor.error.SupplierException;
 import edu.timnas.sistembengkelmotor.error.TypeException;
 import edu.timnas.sistembengkelmotor.service.JasaDao;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
@@ -24,6 +26,7 @@ import edu.timnas.sistembengkelmotor.service.MerkDao;
 import edu.timnas.sistembengkelmotor.service.MotorDao;
 import edu.timnas.sistembengkelmotor.service.OnderdilDao;
 import edu.timnas.sistembengkelmotor.service.RakDao;
+import edu.timnas.sistembengkelmotor.service.SupplierDao;
 import edu.timnas.sistembengkelmotor.service.TypeDao;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,7 +35,7 @@ public class SistemBengkelMotor {
     public static void main(String[] args) throws SQLException, 
             KategoriOnderdilException, RakException, MekanikException, 
             MerkException, TypeException, MotorException, JasaException,
-            OnderdilException{
+            OnderdilException,SupplierException{
                 
 //        SistemBengkelMotorDatabase.getConnection();
     /* 
@@ -68,18 +71,18 @@ public class SistemBengkelMotor {
         dao.deleteKategoriOnderdil(1);
     */
     
-        OnderdilDao dao = SistemBengkelMotorDatabase.getOnderdilDao();
-//        Onderdil onderdil = dao.getOnderdil(4);
-//        Onderdil onderdil = new Onderdil();
+        SupplierDao dao = SistemBengkelMotorDatabase.getSupplierDao();
+        Supplier supplier = dao.getSupplier(1);
+//        Supplier supplier = new Supplier();
         
-//        onderdil.setIdKaton(0);
-//        onderdil.setIdRak(0);
-//        onderdil.setNamaOnderdil("Oke Bro");
+//        supplier.setNamaSupplier("Suzuki Indonesia Centre");
+        supplier.setAlamatSupplier("Jl.Soedirman Said 12, Jakarta Barat");
+        supplier.setNoTelp("089969756372");
 //        onderdil.setHargaJual(99090);
 //        onderdil.setStok(12);
 //        onderdil.setSatuan("paket");
 //        
-//        dao.deleteOnderdil(4);
+        dao.updateSupplier(supplier);
         
 //        List<Onderdil> list = dao.selectAllCombOnderdil();
 ////        

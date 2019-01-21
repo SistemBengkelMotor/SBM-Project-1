@@ -8,6 +8,7 @@ import edu.timnas.sistembengkelmotor.impl.MerkDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.MotorDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.OnderdilDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.RakDaoImpl;
+import edu.timnas.sistembengkelmotor.impl.SupplierDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.TypeDaoImpl;
 import edu.timnas.sistembengkelmotor.service.JasaDao;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
@@ -16,6 +17,7 @@ import edu.timnas.sistembengkelmotor.service.MerkDao;
 import edu.timnas.sistembengkelmotor.service.MotorDao;
 import edu.timnas.sistembengkelmotor.service.OnderdilDao;
 import edu.timnas.sistembengkelmotor.service.RakDao;
+import edu.timnas.sistembengkelmotor.service.SupplierDao;
 import edu.timnas.sistembengkelmotor.service.TypeDao;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -32,6 +34,7 @@ public class SistemBengkelMotorDatabase {
     private static MotorDao motorDao;
     private static JasaDao jasaDao;
     private static OnderdilDao onderdilDao;
+    private static SupplierDao supplierDao;
     
     public static Connection getConnection() throws SQLException{
         if (connection == null) {
@@ -107,6 +110,14 @@ public class SistemBengkelMotorDatabase {
             onderdilDao = new OnderdilDaoImpl(getConnection());   
         }
         return onderdilDao;
+    }
+    
+//Supplier
+    public static SupplierDao getSupplierDao() throws SQLException{
+        if (supplierDao == null) {
+            supplierDao = new SupplierDaoImpl(getConnection());   
+        }
+        return supplierDao;
     }
     
 }
