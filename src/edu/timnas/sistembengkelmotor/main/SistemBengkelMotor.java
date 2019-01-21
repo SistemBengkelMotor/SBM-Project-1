@@ -1,18 +1,21 @@
 package edu.timnas.sistembengkelmotor.main;
 
 import edu.timnas.sistembengkelmotor.database.SistemBengkelMotorDatabase;
+import edu.timnas.sistembengkelmotor.entity.Jasa;
 import edu.timnas.sistembengkelmotor.entity.KategoriOnderdil;
 import edu.timnas.sistembengkelmotor.entity.Mekanik;
 import edu.timnas.sistembengkelmotor.entity.Merk;
 import edu.timnas.sistembengkelmotor.entity.Motor;
 import edu.timnas.sistembengkelmotor.entity.Rak;
 import edu.timnas.sistembengkelmotor.entity.Type;
+import edu.timnas.sistembengkelmotor.error.JasaException;
 import edu.timnas.sistembengkelmotor.error.KategoriOnderdilException;
 import edu.timnas.sistembengkelmotor.error.MekanikException;
 import edu.timnas.sistembengkelmotor.error.MerkException;
 import edu.timnas.sistembengkelmotor.error.MotorException;
 import edu.timnas.sistembengkelmotor.error.RakException;
 import edu.timnas.sistembengkelmotor.error.TypeException;
+import edu.timnas.sistembengkelmotor.service.JasaDao;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
 import edu.timnas.sistembengkelmotor.service.MekanikDao;
 import edu.timnas.sistembengkelmotor.service.MerkDao;
@@ -25,7 +28,7 @@ import java.util.List;
 public class SistemBengkelMotor {
     public static void main(String[] args) throws SQLException, 
             KategoriOnderdilException, RakException, MekanikException, 
-            MerkException, TypeException, MotorException{
+            MerkException, TypeException, MotorException, JasaException{
                 
 //        SistemBengkelMotorDatabase.getConnection();
     /* 
@@ -61,23 +64,23 @@ public class SistemBengkelMotor {
         dao.deleteKategoriOnderdil(1);
     */
     
-        MotorDao dao = SistemBengkelMotorDatabase.getMotorDao();
-//        Motor motor = dao.getMotor("D12345OO");
-//        Motor motor = new Motor();
+        JasaDao dao = SistemBengkelMotorDatabase.getJasaDao();
+//        Jasa jasa = dao.getJasa("Service Biasa");
+//        Jasa jasa = new Jasa();
         
-//        motor.setNopol("M777UI");
+//        jasa.setNamaJasa("Hapus Ini");
 //        motor.setIdType(4);
         
-//        dao.insertMotor(motor);
+        dao.deleteJasa(4);
         
-        List<Motor> list = dao.selectAllCombMotor();
-        
-        for (Motor motor:list) {
-            System.out.println("Nopol  : "+motor.getNopol());
-//            System.out.println("IdType : "+motor.getIdType());
-            System.out.println(" Nama Merk: "+motor.getNamaMerk());
-            System.out.println(" JenisType: "+motor.getJenisType()+"\n");
-        }
+//        List<Jasa> list = dao.selectAllJasa();
+//        
+//        for (Jasa jasa:list) {
+//            System.out.println("Nopol  : "+jasa.getIdJasa());
+////            System.out.println("IdType : "+jasa.getIdType());
+////            System.out.println(" Nama Merk: "+jasa.getNamaMerk());
+//            System.out.println(" JenisType: "+jasa.getNamaJasa()+"\n");
+//        }
         
         
         
