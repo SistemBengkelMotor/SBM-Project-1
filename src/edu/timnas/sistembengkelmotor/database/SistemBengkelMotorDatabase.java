@@ -1,7 +1,9 @@
 package edu.timnas.sistembengkelmotor.database;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import edu.timnas.sistembengkelmotor.entity.Kasir;
 import edu.timnas.sistembengkelmotor.impl.JasaDaoImpl;
+import edu.timnas.sistembengkelmotor.impl.KasirDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.KategoriOnderdilDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.MekanikDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.MerkDaoImpl;
@@ -11,6 +13,7 @@ import edu.timnas.sistembengkelmotor.impl.RakDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.SupplierDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.TypeDaoImpl;
 import edu.timnas.sistembengkelmotor.service.JasaDao;
+import edu.timnas.sistembengkelmotor.service.KasirDao;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
 import edu.timnas.sistembengkelmotor.service.MekanikDao;
 import edu.timnas.sistembengkelmotor.service.MerkDao;
@@ -35,6 +38,7 @@ public class SistemBengkelMotorDatabase {
     private static JasaDao jasaDao;
     private static OnderdilDao onderdilDao;
     private static SupplierDao supplierDao;
+    private static KasirDao kasirDao;
     
     public static Connection getConnection() throws SQLException{
         if (connection == null) {
@@ -118,6 +122,14 @@ public class SistemBengkelMotorDatabase {
             supplierDao = new SupplierDaoImpl(getConnection());   
         }
         return supplierDao;
+    }
+    
+//Kasir
+    public static KasirDao getKasirDao() throws SQLException{
+        if (kasirDao == null) {
+            kasirDao = new KasirDaoImpl(getConnection());   
+        }
+        return kasirDao;
     }
     
 }

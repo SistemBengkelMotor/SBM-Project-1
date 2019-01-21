@@ -2,6 +2,7 @@ package edu.timnas.sistembengkelmotor.main;
 
 import edu.timnas.sistembengkelmotor.database.SistemBengkelMotorDatabase;
 import edu.timnas.sistembengkelmotor.entity.Jasa;
+import edu.timnas.sistembengkelmotor.entity.Kasir;
 import edu.timnas.sistembengkelmotor.entity.KategoriOnderdil;
 import edu.timnas.sistembengkelmotor.entity.Mekanik;
 import edu.timnas.sistembengkelmotor.entity.Merk;
@@ -11,6 +12,7 @@ import edu.timnas.sistembengkelmotor.entity.Rak;
 import edu.timnas.sistembengkelmotor.entity.Supplier;
 import edu.timnas.sistembengkelmotor.entity.Type;
 import edu.timnas.sistembengkelmotor.error.JasaException;
+import edu.timnas.sistembengkelmotor.error.KasirException;
 import edu.timnas.sistembengkelmotor.error.KategoriOnderdilException;
 import edu.timnas.sistembengkelmotor.error.MekanikException;
 import edu.timnas.sistembengkelmotor.error.MerkException;
@@ -20,6 +22,7 @@ import edu.timnas.sistembengkelmotor.error.RakException;
 import edu.timnas.sistembengkelmotor.error.SupplierException;
 import edu.timnas.sistembengkelmotor.error.TypeException;
 import edu.timnas.sistembengkelmotor.service.JasaDao;
+import edu.timnas.sistembengkelmotor.service.KasirDao;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
 import edu.timnas.sistembengkelmotor.service.MekanikDao;
 import edu.timnas.sistembengkelmotor.service.MerkDao;
@@ -35,7 +38,7 @@ public class SistemBengkelMotor {
     public static void main(String[] args) throws SQLException, 
             KategoriOnderdilException, RakException, MekanikException, 
             MerkException, TypeException, MotorException, JasaException,
-            OnderdilException,SupplierException{
+            OnderdilException,SupplierException,KasirException{
                 
 //        SistemBengkelMotorDatabase.getConnection();
     /* 
@@ -71,29 +74,26 @@ public class SistemBengkelMotor {
         dao.deleteKategoriOnderdil(1);
     */
     
-        SupplierDao dao = SistemBengkelMotorDatabase.getSupplierDao();
-        Supplier supplier = dao.getSupplier(1);
-//        Supplier supplier = new Supplier();
+        KasirDao dao = SistemBengkelMotorDatabase.getKasirDao();
+//        Kasir kasir = dao.getKasir(4);
+//        Kasir kasir = new Kasir();
         
-//        supplier.setNamaSupplier("Suzuki Indonesia Centre");
-        supplier.setAlamatSupplier("Jl.Soedirman Said 12, Jakarta Barat");
-        supplier.setNoTelp("089969756372");
+//        kasir.setNamaKasir("ALwi Yahya Mulkjaba");
+//        kasir.setAlamatKasir("jalan gamal alwi");
+//        kasir.setNoTelp("986786876");
 //        onderdil.setHargaJual(99090);
 //        onderdil.setStok(12);
 //        onderdil.setSatuan("paket");
 //        
-        dao.updateSupplier(supplier);
+//        dao.deleteKasir(4);
         
-//        List<Onderdil> list = dao.selectAllCombOnderdil();
+//        List<Kasir> list = dao.selectAllKasir();
 ////        
-//        for (Onderdil onderdil:list) {
-//            System.out.println("idOnderdil   : "+onderdil.getIdOnderdil());
-//            System.out.println("Katon        : "+onderdil.getNamaKaton());
-//            System.out.println("Rak          : "+onderdil.getLokasi());
-//            System.out.println("Nama Onderdil: "+onderdil.getNamaOnderdil());
-//            System.out.println("Harga Jual   : "+onderdil.getHargaJual());
-//            System.out.println("Stok         : "+onderdil.getStok());
-//            System.out.println("Satuan       : "+onderdil.getSatuan()+"\n");
+//        for (Kasir kasir:list) {
+//            System.out.println("idKasir     : "+kasir.getIdKasir());
+//            System.out.println("nama        : "+kasir.getNamaKasir());
+//            System.out.println("alamat        : "+kasir.getAlamatKasir());
+//            System.out.println("notelp       : "+kasir.getNoTelp()+"\n");
 //        }
         
         
