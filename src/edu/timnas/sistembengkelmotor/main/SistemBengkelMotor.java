@@ -1,6 +1,7 @@
 package edu.timnas.sistembengkelmotor.main;
 
 import edu.timnas.sistembengkelmotor.database.SistemBengkelMotorDatabase;
+import edu.timnas.sistembengkelmotor.entity.DetailPembelian;
 import edu.timnas.sistembengkelmotor.entity.Jasa;
 import edu.timnas.sistembengkelmotor.entity.Kasir;
 import edu.timnas.sistembengkelmotor.entity.KategoriOnderdil;
@@ -13,6 +14,7 @@ import edu.timnas.sistembengkelmotor.entity.Pembelian;
 import edu.timnas.sistembengkelmotor.entity.Rak;
 import edu.timnas.sistembengkelmotor.entity.Supplier;
 import edu.timnas.sistembengkelmotor.entity.Type;
+import edu.timnas.sistembengkelmotor.error.DetailPembelianException;
 import edu.timnas.sistembengkelmotor.error.JasaException;
 import edu.timnas.sistembengkelmotor.error.KasirException;
 import edu.timnas.sistembengkelmotor.error.KategoriOnderdilException;
@@ -25,6 +27,7 @@ import edu.timnas.sistembengkelmotor.error.PembelianException;
 import edu.timnas.sistembengkelmotor.error.RakException;
 import edu.timnas.sistembengkelmotor.error.SupplierException;
 import edu.timnas.sistembengkelmotor.error.TypeException;
+import edu.timnas.sistembengkelmotor.service.DetailPembelianDao;
 import edu.timnas.sistembengkelmotor.service.JasaDao;
 import edu.timnas.sistembengkelmotor.service.KasirDao;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
@@ -45,7 +48,7 @@ public class SistemBengkelMotor {
             KategoriOnderdilException, RakException, MekanikException, 
             MerkException, TypeException, MotorException, JasaException,
             OnderdilException,SupplierException,KasirException,
-            PelangganException,PembelianException{
+            PelangganException,PembelianException,DetailPembelianException{
                 
 //        SistemBengkelMotorDatabase.getConnection();
     /* 
@@ -81,27 +84,30 @@ public class SistemBengkelMotor {
         dao.deleteKategoriOnderdil(1);
     */
     
-        PembelianDao dao = SistemBengkelMotorDatabase.getPembelianDao();
-//        Pembelian pembelian = dao.getPembelian(2);
-//        Pembelian pembelian = new Pembelian();
+        DetailPembelianDao dao = SistemBengkelMotorDatabase.getDetailPembelianDao();
+//        DetailPembelian detailPembelian = dao.getDetailPembelian(2);
+//        DetailPembelian detailPembelian = new DetailPembelian();
         
-//        pembelian.setIdSupplier(1);
-//        pembelian.setTglPembelian("19990118");
-//        pembelian.setTotalHargaBeli(999999);
+//        detailPembelian.setIdPembelian(3);
+//        detailPembelian.setIdOnderdil(33999);
+//        detailPembelian.setJumlah(33999);
+//        detailPembelian.setHargaBeliPerUnit(33999);
+//        int subTotal = detailPembelian.getJumlah()*detailPembelian.getHargaBeliPerUnit();
+//        detailPembelian.setSubTotalHargaBeli(detailPembelian.getJumlah()*detailPembelian.getHargaBeliPerUnit());
 //        onderdil.setHargaJual(99090);
 //        onderdil.setStok(12);
 //        onderdil.setSatuan("paket");
 //        
-        dao.deletePembelian(2);
+//        dao.updateDetailPembelian(detailPembelian);
         
-        List<Pembelian> list = dao.selectAllPembelian();
+//        List<Pembelian> list = dao.selectAllPembelian();
 ////        
-        for (Pembelian pembelian:list) {
-            System.out.println("idKasir     : "+pembelian.getIdPembelian());
-            System.out.println("nama        : "+pembelian.getIdSupplier());
-            System.out.println("alamat        : "+pembelian.getTglPembelian());
-            System.out.println("notelp       : "+pembelian.getTotalHargaBeli()+"\n");
-        }
+//        for (Pembelian pembelian:list) {
+//            System.out.println("idKasir     : "+pembelian.getIdPembelian());
+//            System.out.println("nama        : "+pembelian.getIdSupplier());
+//            System.out.println("alamat        : "+pembelian.getTglPembelian());
+//            System.out.println("notelp       : "+pembelian.getTotalHargaBeli()+"\n");
+//        }
         
         
         
