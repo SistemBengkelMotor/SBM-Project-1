@@ -11,6 +11,7 @@ import edu.timnas.sistembengkelmotor.entity.Motor;
 import edu.timnas.sistembengkelmotor.entity.Onderdil;
 import edu.timnas.sistembengkelmotor.entity.Pelanggan;
 import edu.timnas.sistembengkelmotor.entity.Pembelian;
+import edu.timnas.sistembengkelmotor.entity.Penjualan;
 import edu.timnas.sistembengkelmotor.entity.Rak;
 import edu.timnas.sistembengkelmotor.entity.Supplier;
 import edu.timnas.sistembengkelmotor.entity.Type;
@@ -24,6 +25,7 @@ import edu.timnas.sistembengkelmotor.error.MotorException;
 import edu.timnas.sistembengkelmotor.error.OnderdilException;
 import edu.timnas.sistembengkelmotor.error.PelangganException;
 import edu.timnas.sistembengkelmotor.error.PembelianException;
+import edu.timnas.sistembengkelmotor.error.PenjualanException;
 import edu.timnas.sistembengkelmotor.error.RakException;
 import edu.timnas.sistembengkelmotor.error.SupplierException;
 import edu.timnas.sistembengkelmotor.error.TypeException;
@@ -37,6 +39,7 @@ import edu.timnas.sistembengkelmotor.service.MotorDao;
 import edu.timnas.sistembengkelmotor.service.OnderdilDao;
 import edu.timnas.sistembengkelmotor.service.PelangganDao;
 import edu.timnas.sistembengkelmotor.service.PembelianDao;
+import edu.timnas.sistembengkelmotor.service.PenjualanDao;
 import edu.timnas.sistembengkelmotor.service.RakDao;
 import edu.timnas.sistembengkelmotor.service.SupplierDao;
 import edu.timnas.sistembengkelmotor.service.TypeDao;
@@ -48,7 +51,8 @@ public class SistemBengkelMotor {
             KategoriOnderdilException, RakException, MekanikException, 
             MerkException, TypeException, MotorException, JasaException,
             OnderdilException,SupplierException,KasirException,
-            PelangganException,PembelianException,DetailPembelianException{
+            PelangganException,PembelianException,DetailPembelianException,
+            PenjualanException{
                 
 //        SistemBengkelMotorDatabase.getConnection();
     /* 
@@ -84,29 +88,33 @@ public class SistemBengkelMotor {
         dao.deleteKategoriOnderdil(1);
     */
     
-        DetailPembelianDao dao = SistemBengkelMotorDatabase.getDetailPembelianDao();
-//        DetailPembelian detailPembelian = dao.getDetailPembelian(2);
-//        DetailPembelian detailPembelian = new DetailPembelian();
+        PenjualanDao dao = SistemBengkelMotorDatabase.getPenjualanDao();
+//        Penjualan penjualan = dao.getPenjualan(3);
+//        Penjualan penjualan = new Penjualan();
         
-//        detailPembelian.setIdPembelian(3);
-//        detailPembelian.setIdOnderdil(33999);
-//        detailPembelian.setJumlah(33999);
-//        detailPembelian.setHargaBeliPerUnit(33999);
-//        int subTotal = detailPembelian.getJumlah()*detailPembelian.getHargaBeliPerUnit();
-//        detailPembelian.setSubTotalHargaBeli(detailPembelian.getJumlah()*detailPembelian.getHargaBeliPerUnit());
+//        penjualan.setIdKasir(10);
+//        penjualan.setTglPenjualan("20181002");
+//        penjualan.setTotalHarga(37500);
+//        penjualan.setBayar(50000);
+//        penjualan.setKembalian(penjualan.getBayar()-penjualan.getTotalHarga());
+//        penjualan.setHargaBeliPerUnit(33999);
+//        int subTotal = penjualan.getJumlah()*penjualan.getHargaBeliPerUnit();
+//        penjualan.setSubTotalHargaBeli(penjualan.getJumlah()*penjualan.getHargaBeliPerUnit());
 //        onderdil.setHargaJual(99090);
 //        onderdil.setStok(12);
 //        onderdil.setSatuan("paket");
 //        
-//        dao.updateDetailPembelian(detailPembelian);
-        
-//        List<Pembelian> list = dao.selectAllPembelian();
+//        dao.deletePenjualan(3);
+
+//        List<Penjualan> list = dao.selectAllPenjualan();
 ////        
-//        for (Pembelian pembelian:list) {
-//            System.out.println("idKasir     : "+pembelian.getIdPembelian());
-//            System.out.println("nama        : "+pembelian.getIdSupplier());
-//            System.out.println("alamat        : "+pembelian.getTglPembelian());
-//            System.out.println("notelp       : "+pembelian.getTotalHargaBeli()+"\n");
+//        for (Penjualan penjualan:list) {
+//            System.out.println("idKasir     : "+penjualan.getIdPenjualan());
+//            System.out.println("nama        : "+penjualan.getIdKasir());
+//            System.out.println("alamat        : "+penjualan.getTglPenjualan());
+//            System.out.println("notelp       : "+penjualan.getTotalHarga());
+//            System.out.println("notelp       : "+penjualan.getBayar());
+//            System.out.println("notelp       : "+penjualan.getKembalian()+"\n");
 //        }
         
         
