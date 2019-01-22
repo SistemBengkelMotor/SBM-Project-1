@@ -2,6 +2,7 @@ package edu.timnas.sistembengkelmotor.main;
 
 import edu.timnas.sistembengkelmotor.database.SistemBengkelMotorDatabase;
 import edu.timnas.sistembengkelmotor.entity.DetailPembelian;
+import edu.timnas.sistembengkelmotor.entity.DetailPenjualan;
 import edu.timnas.sistembengkelmotor.entity.Jasa;
 import edu.timnas.sistembengkelmotor.entity.Kasir;
 import edu.timnas.sistembengkelmotor.entity.KategoriOnderdil;
@@ -16,6 +17,7 @@ import edu.timnas.sistembengkelmotor.entity.Rak;
 import edu.timnas.sistembengkelmotor.entity.Supplier;
 import edu.timnas.sistembengkelmotor.entity.Type;
 import edu.timnas.sistembengkelmotor.error.DetailPembelianException;
+import edu.timnas.sistembengkelmotor.error.DetailPenjualanException;
 import edu.timnas.sistembengkelmotor.error.JasaException;
 import edu.timnas.sistembengkelmotor.error.KasirException;
 import edu.timnas.sistembengkelmotor.error.KategoriOnderdilException;
@@ -30,6 +32,7 @@ import edu.timnas.sistembengkelmotor.error.RakException;
 import edu.timnas.sistembengkelmotor.error.SupplierException;
 import edu.timnas.sistembengkelmotor.error.TypeException;
 import edu.timnas.sistembengkelmotor.service.DetailPembelianDao;
+import edu.timnas.sistembengkelmotor.service.DetailPenjualanDao;
 import edu.timnas.sistembengkelmotor.service.JasaDao;
 import edu.timnas.sistembengkelmotor.service.KasirDao;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
@@ -52,7 +55,7 @@ public class SistemBengkelMotor {
             MerkException, TypeException, MotorException, JasaException,
             OnderdilException,SupplierException,KasirException,
             PelangganException,PembelianException,DetailPembelianException,
-            PenjualanException{
+            PenjualanException,DetailPenjualanException{
                 
 //        SistemBengkelMotorDatabase.getConnection();
     /* 
@@ -88,33 +91,33 @@ public class SistemBengkelMotor {
         dao.deleteKategoriOnderdil(1);
     */
     
-        PenjualanDao dao = SistemBengkelMotorDatabase.getPenjualanDao();
-//        Penjualan penjualan = dao.getPenjualan(3);
-//        Penjualan penjualan = new Penjualan();
+        DetailPenjualanDao dao = SistemBengkelMotorDatabase.getDetailPenjualanDao();
+//        DetailPenjualan detailDetailPenjualan = dao.getDetailPenjualan(3);
+//        DetailPenjualan detailDetailPenjualan = new DetailPenjualan();
         
-//        penjualan.setIdKasir(10);
-//        penjualan.setTglPenjualan("20181002");
-//        penjualan.setTotalHarga(37500);
-//        penjualan.setBayar(50000);
-//        penjualan.setKembalian(penjualan.getBayar()-penjualan.getTotalHarga());
-//        penjualan.setHargaBeliPerUnit(33999);
-//        int subTotal = penjualan.getJumlah()*penjualan.getHargaBeliPerUnit();
-//        penjualan.setSubTotalHargaBeli(penjualan.getJumlah()*penjualan.getHargaBeliPerUnit());
+//        detailDetailPenjualan.setIdPenjualan(0);
+//        detailDetailPenjualan.setIdOnderdil(0);
+//        detailDetailPenjualan.setJumlah(00);
+//        detailDetailPenjualan.setSubTotal(98750);
+//        detailDetailPenjualan.setKembalian(detailDetailPenjualan.getBayar()-detailDetailPenjualan.getTotalHarga());
+//        detailDetailPenjualan.setHargaBeliPerUnit(33999);
+//        int subTotal = detailDetailPenjualan.getJumlah()*detailDetailPenjualan.getHargaBeliPerUnit();
+//        detailDetailPenjualan.setSubTotalHargaBeli(detailDetailPenjualan.getJumlah()*detailDetailPenjualan.getHargaBeliPerUnit());
 //        onderdil.setHargaJual(99090);
 //        onderdil.setStok(12);
 //        onderdil.setSatuan("paket");
 //        
-//        dao.deletePenjualan(3);
+//        dao.deleteDetailPenjualan(3);
 
-//        List<Penjualan> list = dao.selectAllPenjualan();
+//        List<DetailPenjualan> list = dao.selectAllDetailPenjualan();
 ////        
-//        for (Penjualan penjualan:list) {
-//            System.out.println("idKasir     : "+penjualan.getIdPenjualan());
-//            System.out.println("nama        : "+penjualan.getIdKasir());
-//            System.out.println("alamat        : "+penjualan.getTglPenjualan());
-//            System.out.println("notelp       : "+penjualan.getTotalHarga());
-//            System.out.println("notelp       : "+penjualan.getBayar());
-//            System.out.println("notelp       : "+penjualan.getKembalian()+"\n");
+//        for (DetailPenjualan detailDetailPenjualan:list) {
+//            System.out.println("idKasir     : "+detailDetailPenjualan.getIdDetailPenjualan());
+//            System.out.println("nama        : "+detailDetailPenjualan.getIdPenjualan());
+//            System.out.println("alamat        : "+detailDetailPenjualan.getIdOnderdil());
+//            System.out.println("notelp       : "+detailDetailPenjualan.getJumlah());
+//            System.out.println("notelp       : "+detailDetailPenjualan.getBayar());
+//            System.out.println("notelp       : "+detailDetailPenjualan.getSubTotal()+"\n");
 //        }
         
         
