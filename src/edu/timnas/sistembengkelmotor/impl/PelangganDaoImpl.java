@@ -5,9 +5,9 @@
  */
 package edu.timnas.sistembengkelmotor.impl;
 
-import edu.timnas.sistembengkelmotor.entity.Jasa;
-import edu.timnas.sistembengkelmotor.error.JasaException;
-import edu.timnas.sistembengkelmotor.service.JasaDao;
+import edu.timnas.sistembengkelmotor.entity.Pelanggan;
+import edu.timnas.sistembengkelmotor.error.PelangganException;
+import edu.timnas.sistembengkelmotor.service.PelangganDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,32 +20,34 @@ import java.util.List;
  *
  * @author teguhsis
  */
-public class JasaDaoImpl implements JasaDao{
+public class PelangganDaoImpl implements PelangganDao{
     
     private Connection connection;
-
-    public JasaDaoImpl(Connection connection) {
+    
+    public PelangganDaoImpl(Connection connection) {
         this.connection = connection;
     }
     
-    private final String insertJasa = "INSERT INTO jasa (namaJasa,hargaJasa) "
+    private final String insertPelanggan = "INSERT INTO pelanggan "
+            + "(namaPelanggan, noTelp) "
             + "VALUES (?,?)";
-    private final String updateJasa = "UPDATE jasa SET namaJasa=?, hargaJasa=? "
-            + "WHERE idJasa=?";
-    private final String deleteJasa = "DELETE FROM jasa WHERE idJasa=?";
-    private final String getById = "SELECT * FROM jasa WHERE idJasa=?";
-    private final String getByNama = "SELECT * FROM jasa WHERE namaJasa=?";
-    private final String selectAll = "SELECT * FROM jasa";
-    
+    private final String updatePelanggan = "UPDATE pelanggan "
+            + "SET namaPelanggan=?, noTelp=? "
+            + "WHERE idPelanggan=?";
+    private final String deletePelanggan = "DELETE FROM pelanggan WHERE idPelanggan=?";
+    private final String getById = "SELECT * FROM pelanggan WHERE idPelanggan=?";
+    private final String getByNama = "SELECT * FROM pelanggan WHERE namaPelanggan=?";
+    private final String selectAll = "SELECT * FROM pelanggan";
+
     @Override
-    public void insertJasa(Jasa jasa) throws JasaException {
+    public void insertPelanggan(Pelanggan pelanggan) throws PelangganException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
-            statement = connection.prepareStatement(insertJasa);
-            statement.setString(1, jasa.getNamaJasa());
-            statement.setInt(2, jasa.getHargaJasa());
+            statement = connection.prepareStatement(insertPelanggan);
+            statement.setString(1, pelanggan.getNamaPelanggan());
+            statement.setString(2, pelanggan.getNoTelp());
             statement.executeUpdate();
             
             connection.commit();
@@ -57,7 +59,7 @@ public class JasaDaoImpl implements JasaDao{
             } catch (SQLException ex) {
             }
             
-            throw new JasaException(e.getMessage());
+            throw new PelangganException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -75,15 +77,15 @@ public class JasaDaoImpl implements JasaDao{
     }
 
     @Override
-    public void updateJasa(Jasa jasa) throws JasaException {
+    public void updatePelanggan(Pelanggan pelanggan) throws PelangganException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
-            statement = connection.prepareStatement(updateJasa);
-            statement.setString(1, jasa.getNamaJasa());
-            statement.setInt(2, jasa.getHargaJasa());
-            statement.setInt(3, jasa.getIdJasa());
+            statement = connection.prepareStatement(updatePelanggan);
+            statement.setString(1, pelanggan.getNamaPelanggan());
+            statement.setString(2, pelanggan.getNoTelp());
+            statement.setInt(3, pelanggan.getIdPelanggan());
             statement.executeUpdate();
             
             connection.commit();
@@ -95,7 +97,7 @@ public class JasaDaoImpl implements JasaDao{
             } catch (SQLException ex) {
             }
             
-            throw new JasaException(e.getMessage());
+            throw new PelangganException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -113,13 +115,13 @@ public class JasaDaoImpl implements JasaDao{
     }
 
     @Override
-    public void deleteJasa(Integer idJasa) throws JasaException {
+    public void deletePelanggan(Integer idPelanggan) throws PelangganException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
-            statement = connection.prepareStatement(deleteJasa);
-            statement.setInt(1, idJasa);
+            statement = connection.prepareStatement(deletePelanggan);
+            statement.setInt(1, idPelanggan);
             statement.executeUpdate();
             
             connection.commit();
@@ -131,7 +133,7 @@ public class JasaDaoImpl implements JasaDao{
             } catch (SQLException ex) {
             }
             
-            throw new JasaException(e.getMessage());
+            throw new PelangganException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -149,29 +151,29 @@ public class JasaDaoImpl implements JasaDao{
     }
 
     @Override
-    public Jasa getJasa(Integer idJasa) throws JasaException {
+    public Pelanggan getPelanggan(Integer idPelanggan) throws PelangganException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
             statement = connection.prepareStatement(getById);
-            statement.setInt(1, idJasa);
+            statement.setInt(1, idPelanggan);
             
             ResultSet result = statement.executeQuery();
-            Jasa jasa = null;
+            Pelanggan pelanggan = null;
             
             if (result.next()) {
-                jasa = new Jasa();
-                jasa.setIdJasa(result.getInt("idJasa"));
-                jasa.setNamaJasa(result.getString("namaJasa"));
-                jasa.setHargaJasa(result.getInt("hargaJasa"));
+                pelanggan = new Pelanggan();
+                pelanggan.setIdPelanggan(result.getInt("idPelanggan"));
+                pelanggan.setNamaPelanggan(result.getString("namaPelanggan"));
+                pelanggan.setNoTelp(result.getString("noTelp"));
             }else{
-                throw new JasaException("Jasa dengan id "+idJasa+" tidak ditemukan");
+                throw new PelangganException("Pelanggan dengan id "+idPelanggan+" tidak ditemukan");
             }
             
             connection.commit();
             
-            return jasa;
+            return pelanggan;
         } catch (SQLException e) {
             
             try {
@@ -179,7 +181,7 @@ public class JasaDaoImpl implements JasaDao{
             } catch (SQLException ex) {
             }
             
-            throw new JasaException(e.getMessage());
+            throw new PelangganException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -197,29 +199,29 @@ public class JasaDaoImpl implements JasaDao{
     }
 
     @Override
-    public Jasa getJasa(String namaJasa) throws JasaException {
+    public Pelanggan getPelanggan(String namaPelanggan) throws PelangganException {
         PreparedStatement statement = null;
         try {
             connection.setAutoCommit(false);
             
             statement = connection.prepareStatement(getByNama);
-            statement.setString(1, namaJasa);
+            statement.setString(1, namaPelanggan);
             
             ResultSet result = statement.executeQuery();
-            Jasa jasa = null;
+            Pelanggan pelanggan = null;
             
             if (result.next()) {
-                jasa = new Jasa();
-                jasa.setIdJasa(result.getInt("idJasa"));
-                jasa.setNamaJasa(result.getString("namaJasa"));
-                jasa.setHargaJasa(result.getInt("hargaJasa"));
+                pelanggan = new Pelanggan();
+                pelanggan.setIdPelanggan(result.getInt("idPelanggan"));
+                pelanggan.setNamaPelanggan(result.getString("namaPelanggan"));
+                pelanggan.setNoTelp(result.getString("noTelp"));
             }else{
-                throw new JasaException("Jasa dengan namaJasa "+namaJasa+" tidak ditemukan");
+                throw new PelangganException("Pelanggan dengan namaPelanggan "+namaPelanggan+" tidak ditemukan");
             }
             
             connection.commit();
             
-            return jasa;
+            return pelanggan;
         } catch (SQLException e) {
             
             try {
@@ -227,7 +229,7 @@ public class JasaDaoImpl implements JasaDao{
             } catch (SQLException ex) {
             }
             
-            throw new JasaException(e.getMessage());
+            throw new PelangganException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);
@@ -245,9 +247,9 @@ public class JasaDaoImpl implements JasaDao{
     }
 
     @Override
-    public List<Jasa> selectAllJasa() throws JasaException {
+    public List<Pelanggan> selectAllPelanggan() throws PelangganException {
         Statement statement = null;
-        List<Jasa> list = new ArrayList<Jasa>();
+        List<Pelanggan> list = new ArrayList<Pelanggan>();
         
         try {
             connection.setAutoCommit(false);
@@ -255,14 +257,14 @@ public class JasaDaoImpl implements JasaDao{
             statement = connection.createStatement();
             
             ResultSet result = statement.executeQuery(selectAll);
-            Jasa jasa = null;
+            Pelanggan pelanggan = null;
             
             while (result.next()) {
-                jasa = new Jasa();
-                jasa.setIdJasa(result.getInt("idJasa"));
-                jasa.setNamaJasa(result.getString("namaJasa"));
-                jasa.setHargaJasa(result.getInt("hargaJasa"));
-                list.add(jasa);
+                pelanggan = new Pelanggan();
+                pelanggan.setIdPelanggan(result.getInt("idPelanggan"));
+                pelanggan.setNamaPelanggan(result.getString("namaPelanggan"));
+                pelanggan.setNoTelp(result.getString("noTelp"));
+                list.add(pelanggan);
             }
             
             connection.commit();
@@ -275,7 +277,7 @@ public class JasaDaoImpl implements JasaDao{
             } catch (SQLException ex) {
             }
             
-            throw new JasaException(e.getMessage());
+            throw new PelangganException(e.getMessage());
         }finally{
             try {
                 connection.setAutoCommit(true);

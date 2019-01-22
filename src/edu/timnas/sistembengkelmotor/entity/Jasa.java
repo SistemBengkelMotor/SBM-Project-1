@@ -15,13 +15,15 @@ public class Jasa {
     
     private int idJasa;
     private String namaJasa;
+    private int hargaJasa;
     
 //    2 constructors
     public Jasa(){
         
     }
-    public Jasa(String namaJasa) {
+    public Jasa(String namaJasa, int hargaJasa) {
         this.namaJasa = namaJasa;
+        this.hargaJasa = hargaJasa;
     }
     
 //    getter & setter
@@ -40,12 +42,23 @@ public class Jasa {
     public void setNamaJasa(String namaJasa) {
         this.namaJasa = namaJasa;
     }
+
+    public int getHargaJasa() {
+        return hargaJasa;
+    }
+
+    public void setHargaJasa(int hargaJasa) {
+        this.hargaJasa = hargaJasa;
+    }
+    
 //      equals & hashCode
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.idJasa;
-        hash = 79 * hash + Objects.hashCode(this.namaJasa);
+        int hash = 5;
+        hash = 61 * hash + this.idJasa;
+        hash = 61 * hash + Objects.hashCode(this.namaJasa);
+        hash = 61 * hash + this.hargaJasa;
         return hash;
     }
 
@@ -64,10 +77,12 @@ public class Jasa {
         if (this.idJasa != other.idJasa) {
             return false;
         }
+        if (this.hargaJasa != other.hargaJasa) {
+            return false;
+        }
         if (!Objects.equals(this.namaJasa, other.namaJasa)) {
             return false;
         }
         return true;
     }    
-    
 }

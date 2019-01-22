@@ -9,6 +9,7 @@ import edu.timnas.sistembengkelmotor.impl.MekanikDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.MerkDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.MotorDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.OnderdilDaoImpl;
+import edu.timnas.sistembengkelmotor.impl.PelangganDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.RakDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.SupplierDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.TypeDaoImpl;
@@ -19,6 +20,7 @@ import edu.timnas.sistembengkelmotor.service.MekanikDao;
 import edu.timnas.sistembengkelmotor.service.MerkDao;
 import edu.timnas.sistembengkelmotor.service.MotorDao;
 import edu.timnas.sistembengkelmotor.service.OnderdilDao;
+import edu.timnas.sistembengkelmotor.service.PelangganDao;
 import edu.timnas.sistembengkelmotor.service.RakDao;
 import edu.timnas.sistembengkelmotor.service.SupplierDao;
 import edu.timnas.sistembengkelmotor.service.TypeDao;
@@ -39,6 +41,7 @@ public class SistemBengkelMotorDatabase {
     private static OnderdilDao onderdilDao;
     private static SupplierDao supplierDao;
     private static KasirDao kasirDao;
+    private static PelangganDao pelangganDao;
     
     public static Connection getConnection() throws SQLException{
         if (connection == null) {
@@ -130,6 +133,14 @@ public class SistemBengkelMotorDatabase {
             kasirDao = new KasirDaoImpl(getConnection());   
         }
         return kasirDao;
+    }
+    
+//Pelanggan
+    public static PelangganDao getPelangganDao() throws SQLException{
+        if (pelangganDao == null) {
+            pelangganDao = new PelangganDaoImpl(getConnection());   
+        }
+        return pelangganDao;
     }
     
 }
