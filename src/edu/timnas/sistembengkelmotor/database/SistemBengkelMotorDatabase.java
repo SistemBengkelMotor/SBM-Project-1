@@ -4,6 +4,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import edu.timnas.sistembengkelmotor.entity.Kasir;
 import edu.timnas.sistembengkelmotor.impl.DetailPembelianDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.DetailPenjualanDaoImpl;
+import edu.timnas.sistembengkelmotor.impl.DetailServiceDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.JasaDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.KasirDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.KategoriOnderdilDaoImpl;
@@ -19,6 +20,7 @@ import edu.timnas.sistembengkelmotor.impl.SupplierDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.TypeDaoImpl;
 import edu.timnas.sistembengkelmotor.service.DetailPembelianDao;
 import edu.timnas.sistembengkelmotor.service.DetailPenjualanDao;
+import edu.timnas.sistembengkelmotor.service.DetailServiceDao;
 import edu.timnas.sistembengkelmotor.service.JasaDao;
 import edu.timnas.sistembengkelmotor.service.KasirDao;
 import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
@@ -54,6 +56,8 @@ public class SistemBengkelMotorDatabase {
     private static DetailPembelianDao detailPembelianDao;
     private static PenjualanDao penjualanDao;
     private static DetailPenjualanDao detailPenjualanDao;
+    private static DetailServiceDao detailServiceDao;
+    
     public static Connection getConnection() throws SQLException{
         if (connection == null) {
             
@@ -184,6 +188,14 @@ public class SistemBengkelMotorDatabase {
             detailPenjualanDao = new DetailPenjualanDaoImpl(getConnection());   
         }
         return detailPenjualanDao;
+    }
+    
+//DetailService
+    public static DetailServiceDao getDetailServiceDao() throws SQLException{
+        if (detailServiceDao == null) {
+            detailServiceDao = new DetailServiceDaoImpl(getConnection());   
+        }
+        return detailServiceDao;
     }
     
 }
