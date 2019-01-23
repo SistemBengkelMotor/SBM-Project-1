@@ -15,6 +15,7 @@ import edu.timnas.sistembengkelmotor.entity.Pelanggan;
 import edu.timnas.sistembengkelmotor.entity.Pembelian;
 import edu.timnas.sistembengkelmotor.entity.Penjualan;
 import edu.timnas.sistembengkelmotor.entity.Rak;
+import edu.timnas.sistembengkelmotor.entity.Service;
 import edu.timnas.sistembengkelmotor.entity.Supplier;
 import edu.timnas.sistembengkelmotor.entity.Type;
 import edu.timnas.sistembengkelmotor.error.DetailPembelianException;
@@ -31,6 +32,7 @@ import edu.timnas.sistembengkelmotor.error.PelangganException;
 import edu.timnas.sistembengkelmotor.error.PembelianException;
 import edu.timnas.sistembengkelmotor.error.PenjualanException;
 import edu.timnas.sistembengkelmotor.error.RakException;
+import edu.timnas.sistembengkelmotor.error.ServiceException;
 import edu.timnas.sistembengkelmotor.error.SupplierException;
 import edu.timnas.sistembengkelmotor.error.TypeException;
 import edu.timnas.sistembengkelmotor.service.DetailPembelianDao;
@@ -47,6 +49,7 @@ import edu.timnas.sistembengkelmotor.service.PelangganDao;
 import edu.timnas.sistembengkelmotor.service.PembelianDao;
 import edu.timnas.sistembengkelmotor.service.PenjualanDao;
 import edu.timnas.sistembengkelmotor.service.RakDao;
+import edu.timnas.sistembengkelmotor.service.ServiceDao;
 import edu.timnas.sistembengkelmotor.service.SupplierDao;
 import edu.timnas.sistembengkelmotor.service.TypeDao;
 import java.sql.SQLException;
@@ -58,7 +61,8 @@ public class SistemBengkelMotor {
             MerkException, TypeException, MotorException, JasaException,
             OnderdilException,SupplierException,KasirException,
             PelangganException,PembelianException,DetailPembelianException,
-            PenjualanException,DetailPenjualanException,DetailServiceException{
+            PenjualanException,DetailPenjualanException,DetailServiceException,
+            ServiceException{
                 
 //        SistemBengkelMotorDatabase.getConnection();
     /* 
@@ -94,34 +98,42 @@ public class SistemBengkelMotor {
         dao.deleteKategoriOnderdil(1);
     */
     
-        DetailServiceDao dao = SistemBengkelMotorDatabase.getDetailServiceDao();
-//        DetailService detailDetailService = dao.getDetailService(2);
-//        DetailService detailDetailService = new DetailService();
+        ServiceDao dao = SistemBengkelMotorDatabase.getServiceDao();
+//        Service service = dao.getService(2);
+//        Service service = new Service();
         
-//        detailDetailService.setIdService(2);
-//        detailDetailService.setIdJasa(2);
-//        detailDetailService.setIdOnderdil(2);
-//        detailDetailService.setJumlah(2);
-//        detailDetailService.setSubTotalHarga(22222);
-//        detailDetailService.setKembalian(detailDetailService.getBayar()-detailDetailService.getTotalHarga());
-//        detailDetailService.setHargaBeliPerUnit(33999);
-//        int subTotalHarga = detailDetailService.getJumlah()*detailDetailService.getHargaBeliPerUnit();
-//        detailDetailService.setSubTotalHargaBeli(detailDetailService.getJumlah()*detailDetailService.getHargaBeliPerUnit());
+//        service.setIdMekanik(2);
+//        service.setNopol("wakwaw");
+//        service.setIdPelanggan(2);
+//        service.setIdKasir(2);
+//        service.setTglService("180919");
+//        service.setTglSelesai("190101");
+//        service.setTotalHarga(275000);
+//        service.setBayar(250000);
+//        service.setKembalian(service.getBayar()-service.getTotalHarga());
+//        service.setKembalian(service.getBayar()-service.getTotalHarga());
+//        service.setHargaBeliPerUnit(33999);
+//        int subTotalHarga = service.getJumlah()*service.getHargaBeliPerUnit();
+//        service.setSubTotalHargaBeli(service.getJumlah()*service.getHargaBeliPerUnit());
 //        onderdil.setHargaJual(99090);
 //        onderdil.setStok(12);
 //        onderdil.setSatuan("paket");
 //        
-        dao.deleteDetailService(2);
+//        dao.deleteService(2);
 
-//        List<DetailService> list = dao.selectAllDetailService();
+//        List<Service> list = dao.selectAllService();
 //////        
-//        for (DetailService detailService:list) {
-//            System.out.println("idKasir     : "+detailService.getIdDetailService());
-//            System.out.println("nama        : "+detailService.getIdService());
-//            System.out.println("notelp       : "+detailService.getIdJasa());
-//            System.out.println("alamat        : "+detailService.getIdOnderdil());
-//            System.out.println("notelp       : "+detailService.getJumlah());
-//            System.out.println("notelp       : "+detailService.getSubTotalHarga()+"\n");
+//        for (Service service:list) {
+//            System.out.println("idKasir     : "+service.getIdService());
+//            System.out.println("nama        : "+service.getIdMekanik());
+//            System.out.println("nama        : "+service.getNopol());
+//            System.out.println("notelp       : "+service.getIdPelanggan());
+//            System.out.println("notelp       : "+service.getIdKasir());
+//            System.out.println("alamat        : "+service.getTglService());
+//            System.out.println("alamat        : "+service.getTglSelesai());
+//            System.out.println("notelp       : "+service.getTotalHarga());
+//            System.out.println("notelp       : "+service.getBayar());
+//            System.out.println("notelp       : "+service.getKembalian()+"\n");
 //        }
         
         

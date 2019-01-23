@@ -16,6 +16,7 @@ import edu.timnas.sistembengkelmotor.impl.PelangganDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.PembelianDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.PenjualanDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.RakDaoImpl;
+import edu.timnas.sistembengkelmotor.impl.ServiceDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.SupplierDaoImpl;
 import edu.timnas.sistembengkelmotor.impl.TypeDaoImpl;
 import edu.timnas.sistembengkelmotor.service.DetailPembelianDao;
@@ -32,6 +33,7 @@ import edu.timnas.sistembengkelmotor.service.PelangganDao;
 import edu.timnas.sistembengkelmotor.service.PembelianDao;
 import edu.timnas.sistembengkelmotor.service.PenjualanDao;
 import edu.timnas.sistembengkelmotor.service.RakDao;
+import edu.timnas.sistembengkelmotor.service.ServiceDao;
 import edu.timnas.sistembengkelmotor.service.SupplierDao;
 import edu.timnas.sistembengkelmotor.service.TypeDao;
 import java.sql.Connection;
@@ -57,6 +59,7 @@ public class SistemBengkelMotorDatabase {
     private static PenjualanDao penjualanDao;
     private static DetailPenjualanDao detailPenjualanDao;
     private static DetailServiceDao detailServiceDao;
+    private static ServiceDao serviceDao;
     
     public static Connection getConnection() throws SQLException{
         if (connection == null) {
@@ -196,6 +199,13 @@ public class SistemBengkelMotorDatabase {
             detailServiceDao = new DetailServiceDaoImpl(getConnection());   
         }
         return detailServiceDao;
+    }
+//Service
+    public static ServiceDao getServiceDao() throws SQLException{
+        if (serviceDao == null) {
+            serviceDao = new ServiceDaoImpl(getConnection());   
+        }
+        return serviceDao;
     }
     
 }
