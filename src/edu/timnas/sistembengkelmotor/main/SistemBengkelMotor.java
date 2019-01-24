@@ -52,8 +52,13 @@ import edu.timnas.sistembengkelmotor.service.RakDao;
 import edu.timnas.sistembengkelmotor.service.ServiceDao;
 import edu.timnas.sistembengkelmotor.service.SupplierDao;
 import edu.timnas.sistembengkelmotor.service.TypeDao;
+import edu.timnas.sistembengkelmotor.view.KategoriOnderdilView;
+import edu.timnas.sistembengkelmotor.view.MainViewKategoriOnderdil;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 
 public class SistemBengkelMotor {
     public static void main(String[] args) throws SQLException, 
@@ -98,7 +103,7 @@ public class SistemBengkelMotor {
         dao.deleteKategoriOnderdil(1);
     */
     
-        ServiceDao dao = SistemBengkelMotorDatabase.getServiceDao();
+//        ServiceDao dao = SistemBengkelMotorDatabase.getServiceDao();
 //        Service service = dao.getService(2);
 //        Service service = new Service();
         
@@ -135,7 +140,28 @@ public class SistemBengkelMotor {
 //            System.out.println("notelp       : "+service.getBayar());
 //            System.out.println("notelp       : "+service.getKembalian()+"\n");
 //        }
+
+       /*
+        KategoriOnderdilView ko = new KategoriOnderdilView();
+        MainViewKategoriOnderdil mv = new MainViewKategoriOnderdil();
         
+        mv.setVisible(true);
+       */
+       
+        // bisa menggunakan Swing
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    MainViewKategoriOnderdil kat = new MainViewKategoriOnderdil();
+                    kat.loadDatatabase();
+                    kat.setVisible(true);
+                } catch (SQLException e) {
+                } catch (KategoriOnderdilException ex) {
+                    Logger.getLogger(SistemBengkelMotor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
         
         
     }

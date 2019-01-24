@@ -43,9 +43,16 @@ public class KategoriOnderdilDaoImpl implements KategoriOnderdilDao{
         try {
             connection.setAutoCommit(false);
             
-            statement = connection.prepareStatement(insertKategoriOnderdil);
+            //  Statement.Return...  untuk mengecek id di tabel dalam database (soalnya id memiliki auto-increment)
+            statement = connection.prepareStatement(insertKategoriOnderdil, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, kategoriOnderdil.getNamaKaton());
             statement.executeUpdate();
+            
+            // kalau memang ada data id maka tampilkan ke program javanya
+            ResultSet result = statement.getGeneratedKeys();
+            if (result.next()) {
+                kategoriOnderdil.setIdKaton(result.getInt(1));
+            }
             
             connection.commit();
             

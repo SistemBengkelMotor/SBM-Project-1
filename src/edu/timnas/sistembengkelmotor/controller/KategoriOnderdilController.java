@@ -92,7 +92,7 @@ public class KategoriOnderdilController {
         }
         
         //  konfirmasi penghapusan data
-        if (JOptionPane.showConfirmDialog(view, "Delete data dengan ID "+model.getIdKaton()+" ?") == JOptionPane.OK_OPTION) {
+        if (JOptionPane.showConfirmDialog(view, "Anda yakin akan delete data ?") == JOptionPane.OK_OPTION) {
             Integer id = Integer.parseInt(view.getTxtKatonId().getText());
             model.setIdKaton(id);
             

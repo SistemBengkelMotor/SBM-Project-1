@@ -5,24 +5,46 @@
  */
 package edu.timnas.sistembengkelmotor.view;
 
+import edu.timnas.sistembengkelmotor.controller.KategoriOnderdilController;
+import edu.timnas.sistembengkelmotor.database.SistemBengkelMotorDatabase;
+import edu.timnas.sistembengkelmotor.entity.KategoriOnderdil;
+import edu.timnas.sistembengkelmotor.error.KategoriOnderdilException;
+import edu.timnas.sistembengkelmotor.event.KategoriOnderdilListener;
+import edu.timnas.sistembengkelmotor.model.KategoriOnderdilModel;
 import edu.timnas.sistembengkelmotor.model.TabelKategoriOnderdilModel;
+import edu.timnas.sistembengkelmotor.service.KategoriOnderdilDao;
+import java.sql.SQLException;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author teguhsis
  */
-public class KategoriOnderdilView extends javax.swing.JPanel {
+public class KategoriOnderdilView extends javax.swing.JPanel implements KategoriOnderdilListener, ListSelectionListener{
 
     private TabelKategoriOnderdilModel tabelModel;
-    
+    private KategoriOnderdilModel model;
+    private KategoriOnderdilController controller;
     
     
     public KategoriOnderdilView() {
         tabelModel = new TabelKategoriOnderdilModel();
         
+        model = new KategoriOnderdilModel();
+        model.setListener(this);
+        
+        controller = new KategoriOnderdilController();
+        controller.setModel(model);
+        
         initComponents();
+        
+//        menampilkan ke form textFields dari tabel yg dipili untuk di-update
+        tableKaton.getSelectionModel().addListSelectionListener(this);
+        
+        
         tableKaton.setModel(tabelModel);
     }
 
@@ -85,6 +107,11 @@ public class KategoriOnderdilView extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tableKaton);
 
         btnKatonReset.setText("RESET");
+        btnKatonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKatonResetActionPerformed(evt);
+            }
+        });
 
         btnKatonSave.setText("SAVE");
         btnKatonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -94,8 +121,18 @@ public class KategoriOnderdilView extends javax.swing.JPanel {
         });
 
         btnKatonUpdate.setText("UPDATE");
+        btnKatonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKatonUpdateActionPerformed(evt);
+            }
+        });
 
         btnKatonDelete.setText("DELETE");
+        btnKatonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKatonDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -156,7 +193,23 @@ public class KategoriOnderdilView extends javax.swing.JPanel {
 
     private void btnKatonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKatonSaveActionPerformed
         // TODO add your handling code here:
+        controller.insertKategoriOnderdil(this);
     }//GEN-LAST:event_btnKatonSaveActionPerformed
+
+    private void btnKatonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKatonResetActionPerformed
+        // TODO add your handling code here:
+        controller.resetKategoriOnderdil(this);
+    }//GEN-LAST:event_btnKatonResetActionPerformed
+
+    private void btnKatonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKatonUpdateActionPerformed
+        // TODO add your handling code here:
+        controller.updateKategoriOnderdil(this);
+    }//GEN-LAST:event_btnKatonUpdateActionPerformed
+
+    private void btnKatonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKatonDeleteActionPerformed
+        // TODO add your handling code here:
+        controller.deleteKategoriOnderdil(this);
+    }//GEN-LAST:event_btnKatonDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -172,4 +225,48 @@ public class KategoriOnderdilView extends javax.swing.JPanel {
     private javax.swing.JTextField txtKatonId;
     private javax.swing.JTextField txtKatonNama;
     // End of variables declaration//GEN-END:variables
+    
+    
+//    hasil implements dari KategoriOnderdilListener
+    @Override
+    public void onChange(KategoriOnderdilModel model) {
+        txtKatonId.setText(model.getIdKaton()+"");
+        txtKatonNama.setText(model.getNamaKaton());
+    }
+
+    @Override
+    public void onInsert(KategoriOnderdil kategoriOnderdil) {
+        tabelModel.add(kategoriOnderdil);
+    }
+
+    @Override
+    public void onDelete() {
+        int index = tableKaton.getSelectedRow() ;
+        tabelModel.remove(index);
+    }
+
+    @Override
+    public void onUpdate(KategoriOnderdil kategoriOnderdil) {
+        int index = tableKaton.getSelectedRow() ;
+        tabelModel.set(index, kategoriOnderdil);
+    }
+
+    
+//    implements dari ListSelectionListener
+    @Override
+    public void valueChanged(ListSelectionEvent lse) {
+        try {
+            KategoriOnderdil model = tabelModel.get(tableKaton.getSelectedRow());
+            txtKatonId.setText(model.getIdKaton()+"");
+            txtKatonNama.setText(model.getNamaKaton());
+        } catch (IndexOutOfBoundsException  exception) {
+            
+        }
+    }
+    
+    public void  loadDatatabase() throws SQLException, KategoriOnderdilException{
+        KategoriOnderdilDao dao = SistemBengkelMotorDatabase.getKategoriOnderdilDao();
+        tabelModel.setList(dao.selectAllKategoriOnderdil());
+    }
+    
 }
