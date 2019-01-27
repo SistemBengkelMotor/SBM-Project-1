@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -46,11 +46,16 @@ public class KasirDaoImpl implements KasirDao{
         try {
             connection.setAutoCommit(false);
             
-            statement = connection.prepareStatement(insertKasir);
+            statement = connection.prepareStatement(insertKasir, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, kasir.getNamaKasir());
             statement.setString(2, kasir.getAlamatKasir());
             statement.setString(3, kasir.getNoTelp());
             statement.executeUpdate();
+            
+            ResultSet result = statement.getGeneratedKeys();
+            if (result.next()) {
+                kasir.setIdKasir(result.getInt(1));
+            }
             
             connection.commit();
             
