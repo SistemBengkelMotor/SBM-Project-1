@@ -53,6 +53,7 @@ import edu.timnas.sistembengkelmotor.service.ServiceDao;
 import edu.timnas.sistembengkelmotor.service.SupplierDao;
 import edu.timnas.sistembengkelmotor.service.TypeDao;
 import edu.timnas.sistembengkelmotor.view.KategoriOnderdilView;
+import edu.timnas.sistembengkelmotor.view.MainView;
 import edu.timnas.sistembengkelmotor.view.MainViewKasir;
 import edu.timnas.sistembengkelmotor.view.MainViewKategoriOnderdil;
 import java.sql.SQLException;
@@ -157,13 +158,16 @@ public class SistemBengkelMotor {
 //                    MainViewKategoriOnderdil kat = new MainViewKategoriOnderdil();
                     MainViewKasir kas = new MainViewKasir();
                     kas.loadDatabase();
-                    kas.setVisible(true);
+//                    kas.setVisible(true);
                 } catch (SQLException e) {
                 } catch (KasirException ex) {
                     Logger.getLogger(SistemBengkelMotor.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
+        
+        MainView mv = new MainView();
+        mv.setVisible(true);
         
         
     }
