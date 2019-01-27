@@ -56,6 +56,7 @@ import edu.timnas.sistembengkelmotor.view.KategoriOnderdilView;
 import edu.timnas.sistembengkelmotor.view.MainView;
 import edu.timnas.sistembengkelmotor.view.MainViewKasir;
 import edu.timnas.sistembengkelmotor.view.MainViewKategoriOnderdil;
+import edu.timnas.sistembengkelmotor.view.MainViewRak;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -156,18 +157,20 @@ public class SistemBengkelMotor {
             public void run() {
                 try {
 //                    MainViewKategoriOnderdil kat = new MainViewKategoriOnderdil();
-                    MainViewKasir kas = new MainViewKasir();
-                    kas.loadDatabase();
-//                    kas.setVisible(true);
+//                    MainViewKasir kas = new MainViewKasir();
+                    MainViewRak rak = new MainViewRak();
+                    rak.loadDatabase();
+                    rak.setVisible(true);
                 } catch (SQLException e) {
-                } catch (KasirException ex) {
+                } catch (RakException ex) {
                     Logger.getLogger(SistemBengkelMotor.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
         
-        MainView mv = new MainView();
-        mv.setVisible(true);
+//        MainView mv = new MainView();
+//        MainViewRak mv = new MainViewRak();
+//        mv.setVisible(true);
         
         
     }

@@ -5,27 +5,26 @@
  */
 package edu.timnas.sistembengkelmotor.view;
 
-import edu.timnas.sistembengkelmotor.entity.Pelanggan;
-import edu.timnas.sistembengkelmotor.error.KasirException;
+import edu.timnas.sistembengkelmotor.error.RakException;
 import java.sql.SQLException;
 
 /**
  *
  * @author teguhsis
  */
-public class MainViewKasir extends javax.swing.JFrame {
+public class MainViewRak extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainViewKasir
+     * Creates new form MainViewRak
      */
-    public MainViewKasir() {
+    public MainViewRak() {
         initComponents();
     }
     
-    public void loadDatabase()throws SQLException ,KasirException{
-        kasirView1.loadDatabase();
+    public void loadDatabase()throws SQLException ,RakException{
+        rakView1.loadDatabase();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,12 +34,10 @@ public class MainViewKasir extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kasirView1 = new edu.timnas.sistembengkelmotor.view.KasirView();
+        rakView1 = new edu.timnas.sistembengkelmotor.view.RakView();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        kasirView1.setPreferredSize(new java.awt.Dimension(832, 500));
-        getContentPane().add(kasirView1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(rakView1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -51,6 +48,6 @@ public class MainViewKasir extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private edu.timnas.sistembengkelmotor.view.KasirView kasirView1;
+    private edu.timnas.sistembengkelmotor.view.RakView rakView1;
     // End of variables declaration//GEN-END:variables
 }

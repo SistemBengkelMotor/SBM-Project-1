@@ -89,7 +89,6 @@ public class MainView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Sistem Bengkel Motor");
-        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         bodyPanel.setBackground(java.awt.Color.white);
         bodyPanel.setMaximumSize(new java.awt.Dimension(1366, 768));
@@ -341,6 +340,8 @@ public class MainView extends javax.swing.JFrame {
         mainPanel.setPreferredSize(new java.awt.Dimension(1105, 768));
         mainPanel.setLayout(new java.awt.CardLayout());
 
+        katonPanel.setBackground(java.awt.Color.white);
+
         jLabel7.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
         jLabel7.setText("Manajemen Kategori Onderdil");
 
@@ -362,6 +363,8 @@ public class MainView extends javax.swing.JFrame {
         );
 
         mainPanel.add(katonPanel, "card2");
+
+        onderdilPanel.setBackground(java.awt.Color.white);
 
         jLabel8.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
         jLabel8.setText("Manajemen Onderdil");
