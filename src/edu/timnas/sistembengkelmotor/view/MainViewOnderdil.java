@@ -5,25 +5,25 @@
  */
 package edu.timnas.sistembengkelmotor.view;
 
-import edu.timnas.sistembengkelmotor.entity.Pelanggan;
 import edu.timnas.sistembengkelmotor.error.KasirException;
+import edu.timnas.sistembengkelmotor.error.OnderdilException;
 import java.sql.SQLException;
 
 /**
  *
  * @author teguhsis
  */
-public class MainViewKasir extends javax.swing.JFrame {
+public class MainViewOnderdil extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainViewKasir
+     * Creates new form MainViewOnderdil
      */
-    public MainViewKasir() {
+    public MainViewOnderdil() {
         initComponents();
     }
     
-    public void loadDatabase()throws SQLException ,KasirException{
-        kasirView1.loadDatabase();
+     public void loadDatabase()throws SQLException, OnderdilException{
+        onderdilView1.loadDatabase();
     }
 
     /**
@@ -35,16 +35,10 @@ public class MainViewKasir extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        kasirView1 = new edu.timnas.sistembengkelmotor.view.KasirView();
+        onderdilView1 = new edu.timnas.sistembengkelmotor.view.OnderdilView();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(600, 768));
-        setPreferredSize(new java.awt.Dimension(600, 768));
-
-        kasirView1.setMaximumSize(new java.awt.Dimension(32767, 500));
-        kasirView1.setMinimumSize(new java.awt.Dimension(545, 500));
-        kasirView1.setPreferredSize(new java.awt.Dimension(600, 500));
-        getContentPane().add(kasirView1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(onderdilView1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -52,9 +46,9 @@ public class MainViewKasir extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-  
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private edu.timnas.sistembengkelmotor.view.KasirView kasirView1;
+    private edu.timnas.sistembengkelmotor.view.OnderdilView onderdilView1;
     // End of variables declaration//GEN-END:variables
 }

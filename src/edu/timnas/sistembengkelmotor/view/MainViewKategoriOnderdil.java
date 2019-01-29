@@ -38,10 +38,10 @@ public class MainViewKategoriOnderdil extends javax.swing.JFrame {
 
         kategoriOnderdilView1 = new edu.timnas.sistembengkelmotor.view.KategoriOnderdilView();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(kategoriOnderdilView1, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

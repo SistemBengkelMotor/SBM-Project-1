@@ -36,10 +36,10 @@ public class MainViewRak extends javax.swing.JFrame {
 
         rakView1 = new edu.timnas.sistembengkelmotor.view.RakView();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(rakView1, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

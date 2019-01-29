@@ -5,8 +5,17 @@
  */
 package edu.timnas.sistembengkelmotor.view;
 
+import edu.timnas.sistembengkelmotor.error.KasirException;
+import edu.timnas.sistembengkelmotor.error.KategoriOnderdilException;
+import edu.timnas.sistembengkelmotor.error.OnderdilException;
+import edu.timnas.sistembengkelmotor.error.RakException;
+import edu.timnas.sistembengkelmotor.main.SistemBengkelMotor;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -24,6 +33,10 @@ public class MainView extends javax.swing.JFrame {
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
+    }
+    
+      public void loadDatabase()throws SQLException ,KasirException, OnderdilException{
+        onderdilView1.loadDatabase();
     }
 
     public int getActiveMenu() {
@@ -75,10 +88,16 @@ public class MainView extends javax.swing.JFrame {
         btnMainService = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
-        katonPanel = new javax.swing.JPanel();
+        KomponenPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         onderdilPanel = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        btnOnderdilUpdate = new javax.swing.JButton();
+        btnOnderdilReset = new javax.swing.JButton();
+        btnOnderdilDelete = new javax.swing.JButton();
+        btnOnderdilSave = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        btnOnderdilKeRak = new javax.swing.JButton();
+        onderdilView1 = new edu.timnas.sistembengkelmotor.view.OnderdilView();
         pembelianPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         penjualanPanel = new javax.swing.JPanel();
@@ -118,7 +137,7 @@ public class MainView extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel1.setText("Kategori Onderdil");
+        jLabel1.setText("Komponen SBM");
 
         javax.swing.GroupLayout btnMainKategoriLayout = new javax.swing.GroupLayout(btnMainKategori);
         btnMainKategori.setLayout(btnMainKategoriLayout);
@@ -340,50 +359,101 @@ public class MainView extends javax.swing.JFrame {
         mainPanel.setPreferredSize(new java.awt.Dimension(1105, 768));
         mainPanel.setLayout(new java.awt.CardLayout());
 
-        katonPanel.setBackground(java.awt.Color.white);
+        KomponenPanel.setBackground(java.awt.Color.white);
 
         jLabel7.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
-        jLabel7.setText("Manajemen Kategori Onderdil");
+        jLabel7.setText("Manajemen Komponen Sistem Bengkel");
 
-        javax.swing.GroupLayout katonPanelLayout = new javax.swing.GroupLayout(katonPanel);
-        katonPanel.setLayout(katonPanelLayout);
-        katonPanelLayout.setHorizontalGroup(
-            katonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(katonPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout KomponenPanelLayout = new javax.swing.GroupLayout(KomponenPanel);
+        KomponenPanel.setLayout(KomponenPanelLayout);
+        KomponenPanelLayout.setHorizontalGroup(
+            KomponenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(KomponenPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addContainerGap(730, Short.MAX_VALUE))
+                .addContainerGap(623, Short.MAX_VALUE))
         );
-        katonPanelLayout.setVerticalGroup(
-            katonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(katonPanelLayout.createSequentialGroup()
+        KomponenPanelLayout.setVerticalGroup(
+            KomponenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(KomponenPanelLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel7)
                 .addContainerGap(704, Short.MAX_VALUE))
         );
 
-        mainPanel.add(katonPanel, "card2");
+        mainPanel.add(KomponenPanel, "card2");
 
         onderdilPanel.setBackground(java.awt.Color.white);
+        onderdilPanel.setMaximumSize(new java.awt.Dimension(1100, 768));
+        onderdilPanel.setPreferredSize(new java.awt.Dimension(1100, 768));
 
-        jLabel8.setFont(new java.awt.Font("Noto Sans", 1, 24)); // NOI18N
-        jLabel8.setText("Manajemen Onderdil");
+        btnOnderdilUpdate.setText("UPDATE");
+
+        btnOnderdilReset.setText("RESET");
+
+        btnOnderdilDelete.setText("DELETE");
+
+        btnOnderdilSave.setText("SAVE");
+
+        jButton1.setText("Kategori Onderdil");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnOnderdilKeRak.setText("Lokasi/Rak");
+        btnOnderdilKeRak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOnderdilKeRakActionPerformed(evt);
+            }
+        });
+
+        onderdilView1.setMaximumSize(new java.awt.Dimension(1100, 768));
 
         javax.swing.GroupLayout onderdilPanelLayout = new javax.swing.GroupLayout(onderdilPanel);
         onderdilPanel.setLayout(onderdilPanelLayout);
         onderdilPanelLayout.setHorizontalGroup(
             onderdilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(onderdilPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(839, Short.MAX_VALUE))
+                .addGroup(onderdilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(onderdilPanelLayout.createSequentialGroup()
+                        .addGap(808, 808, 808)
+                        .addComponent(btnOnderdilKeRak)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addGroup(onderdilPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(onderdilView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnOnderdilReset)
+                        .addGap(138, 138, 138)
+                        .addComponent(btnOnderdilSave)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnOnderdilUpdate)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnOnderdilDelete)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         onderdilPanelLayout.setVerticalGroup(
             onderdilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(onderdilPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel8)
-                .addContainerGap(706, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(onderdilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOnderdilKeRak, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1))
+                .addGroup(onderdilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(onderdilPanelLayout.createSequentialGroup()
+                        .addGap(615, 615, 615)
+                        .addGroup(onderdilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnOnderdilReset)
+                            .addComponent(btnOnderdilUpdate)
+                            .addComponent(btnOnderdilSave)
+                            .addComponent(btnOnderdilDelete)))
+                    .addGroup(onderdilPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(onderdilView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(onderdilPanel, "card3");
@@ -498,6 +568,7 @@ public class MainView extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMainKategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnMainKategoriKeyPressed
@@ -525,7 +596,7 @@ public class MainView extends javax.swing.JFrame {
         mainPanel.revalidate();
         setActiveMenu(1);
         // add panel
-        mainPanel.add(katonPanel);
+        mainPanel.add(KomponenPanel);
         mainPanel.repaint();
         mainPanel.revalidate();
     }//GEN-LAST:event_btnMainKategoriMousePressed
@@ -672,6 +743,46 @@ public class MainView extends javax.swing.JFrame {
         mainPanel.revalidate();
     }//GEN-LAST:event_btnMainPenjualanMousePressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    MainViewKategoriOnderdil kat = new MainViewKategoriOnderdil();
+//                    MainViewRak rak = new MainViewRak();
+//                    MainView ut = new MainView();
+                    kat.loadDatatabase();
+                    kat.setVisible(true);
+                } catch (KategoriOnderdilException ex) {
+                    Logger.getLogger(SistemBengkelMotor.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnOnderdilKeRakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnderdilKeRakActionPerformed
+        // TODO add your handling code here:
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    MainViewRak rak = new MainViewRak();
+//                    MainViewRak rak = new MainViewRak();
+//                    MainView ut = new MainView();
+                    rak.loadDatabase();
+                    rak.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (RakException ex) {
+                    Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }//GEN-LAST:event_btnOnderdilKeRakActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -708,6 +819,7 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel KomponenPanel;
     private javax.swing.JPanel bodyPanel;
     private javax.swing.JPanel btnMainKategori;
     private javax.swing.JPanel btnMainOnderdil;
@@ -715,6 +827,12 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel btnMainPenjualan;
     private javax.swing.JPanel btnMainService;
     private javax.swing.JPanel btnMainSupplier;
+    private javax.swing.JButton btnOnderdilDelete;
+    private javax.swing.JButton btnOnderdilKeRak;
+    private javax.swing.JButton btnOnderdilReset;
+    private javax.swing.JButton btnOnderdilSave;
+    private javax.swing.JButton btnOnderdilUpdate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -724,15 +842,15 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel katonPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel onderdilPanel;
+    private edu.timnas.sistembengkelmotor.view.OnderdilView onderdilView1;
     private javax.swing.JPanel pembelianPanel;
     private javax.swing.JPanel penjualanPanel;
     private javax.swing.JPanel servicePanel;
     private javax.swing.JPanel supplierPanel;
     // End of variables declaration//GEN-END:variables
+
 }
